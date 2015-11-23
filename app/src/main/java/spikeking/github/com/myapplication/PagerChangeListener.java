@@ -68,7 +68,7 @@ public class PagerChangeListener implements ViewPager.OnPageChangeListener {
      * @return 终止滑动
      */
     public boolean isFinishedScrolling(int position, float positionOffset) {
-        return mIsScrolling && (positionOffset == 0f && position == mFinalPosition);
+        return mIsScrolling && (positionOffset == 0f && position == mFinalPosition) || !mImageAnimator.isWithin(position);
     }
 
     /**

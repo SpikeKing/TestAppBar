@@ -1,6 +1,7 @@
 package spikeking.github.com.myapplication;
 
 import android.support.annotation.DrawableRes;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -11,11 +12,16 @@ import android.widget.ImageView;
  */
 public class ImageAnimator {
 
+    private static final float FACTOR = 0.1f;
+
     private final SimpleAdapter mAdapter; // 适配器
     private final ImageView mTargetImage; // 原始图片
     private final ImageView mOutgoingImage; // 渐变图片
 
     private int mActualStart; // 实际起始位置
+
+    private int mStart;
+    private int mEnd;
 
     public ImageAnimator(SimpleAdapter adapter, ImageView targetImage, ImageView outgoingImage) {
         mAdapter = adapter;
@@ -37,11 +43,18 @@ public class ImageAnimator {
 
         // 原始图片
         mOutgoingImage.setImageDrawable(mTargetImage.getDrawable()); // 原始的图片
+
+        // 起始图片
+        mOutgoingImage.setTranslationX(0f);
+
         mOutgoingImage.setVisibility(View.VISIBLE);
         mOutgoingImage.setAlpha(1.0f);
 
         // 目标图片
         mTargetImage.setImageResource(incomeId);
+
+        mStart = Math.min(startPosition, endPosition);
+        mEnd = Math.max(startPosition, endPosition);
     }
 
     /**
@@ -63,13 +76,28 @@ public class ImageAnimator {
         }
     }
 
-    // 向后滚动, 比如0->1, offset滚动的距离(0->1), 目标渐渐淡出
+    // 向前滚动, 比如0->1, offset滚动的距离(0->1), 目标渐渐淡出
     public void forward(float positionOffset) {
+        Log.e("DEBUG-WCL", "forward-positionOffset: " + positionOffset);
+        int width = mTargetImage.getWidth();
+        mOutgoingImage.setTranslationX(-positionOffset * (FACTOR * width));
+        mTargetImage.setTranslationX((1 - positionOffset) * (FACTOR * width));
+
         mTargetImage.setAlpha(positionOffset);
     }
 
-    // 向前滚动, 比如1->0, offset滚动的距离(1->0), 目标渐渐淡出
+    // 向后滚动, 比如1->0, offset滚动的距离(1->0), 目标渐渐淡入
     public void backwards(float positionOffset) {
+        Log.e("DEBUG-WCL", "backwards-positionOffset: " + positionOffset);
+        int width = mTargetImage.getWidth();
+        mOutgoingImage.setTranslationX((1 - positionOffset) * (FACTOR * width));
+        mTargetImage.setTranslationX(-(positionOffset) * (FACTOR * width));
+
         mTargetImage.setAlpha(1 - positionOffset);
+    }
+
+    // 判断停止
+    public boolean isWithin(int position) {
+        return position >= mStart && position < mEnd;
     }
 }
