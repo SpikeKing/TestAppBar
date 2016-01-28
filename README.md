@@ -3,8 +3,6 @@ AppBar的Demo
 
 AppBar作为Android5.0的重要动画效果, 非常绚丽的UI, 通过内容驱动, 可以减少页面的访问, 更加便捷的传递主题思想. 那么我们看看如何使用.
 
-![效果](http://img.blog.csdn.net/20151130065537669)
-
 ### 1. 准备
 创建一个Navigation Drawer的工程, 修改主题颜色.
 ```
