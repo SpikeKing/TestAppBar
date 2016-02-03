@@ -1,5 +1,5 @@
 # TestAppBar
-AppBar的Demo
+使用AppBar的Demo
 
 AppBar作为Android5.0的重要动画效果, 非常绚丽的UI, 通过内容驱动, 可以减少页面的访问, 更加便捷的传递主题思想. 那么我们看看如何使用.
 
