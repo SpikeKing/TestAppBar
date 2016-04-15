@@ -13,4 +13,9 @@
         android:text="HelloWorld"
         android:textSize="16sp"/>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/main_lv_list"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>
