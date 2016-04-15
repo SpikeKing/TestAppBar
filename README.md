@@ -566,6 +566,7 @@ setTitle("Girls' Generation");
 ```
 
 动画效果
+
 ![AppBar](https://github.com/SpikeKing/TestAppBar/blob/master/appbar-anim.gif)
 
 ---
