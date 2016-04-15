@@ -9,7 +9,7 @@ AppBar作为Android5.0的重要动画效果, 非常绚丽的UI, 通过内容驱�
 
 本文源码的GitHub[下载地址](https://github.com/SpikeKing/TestAppBar)
 
-![效果](227-app-bar-first/appbar-demo.png)
+![效果](https://github.com/SpikeKing/TestAppBar/blob/master/appbar-demo.png)
 
 ---
 
@@ -566,7 +566,7 @@ setTitle("Girls' Generation");
 ```
 
 动画效果
-![AppBar](227-app-bar-first/appbar-anim.gif)
+![AppBar](https://github.com/SpikeKing/TestAppBar/blob/master/appbar-anim.gif)
 
 ---
 
