@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by wangchenlong on 15/11/9.
  */
 public class SimpleFragment extends Fragment {
-    private static final String ARG_SELECTION_NUM = "arg_selection_num";
+    private static final String ARG_SELECTION_NUM = "arg_selection_num"; // 参数的Tag
 
     // 显示的文本信息
     private static final int[] TEXTS = {
