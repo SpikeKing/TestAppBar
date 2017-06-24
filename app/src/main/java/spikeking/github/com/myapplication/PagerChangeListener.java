@@ -10,15 +10,13 @@ import android.widget.ImageView;
  * Created by wangchenlong on 15/11/9.
  */
 public class PagerChangeListener implements ViewPager.OnPageChangeListener {
-    private ImageAnimator mImageAnimator;
+    private ImageAnimator mImageAnimator; // 图片动画器
 
     private int mCurrentPosition;
-
     private int mFinalPosition;
-
     private boolean mIsScrolling = false;
 
-    public PagerChangeListener(ImageAnimator imageAnimator) {
+    private PagerChangeListener(ImageAnimator imageAnimator) {
         mImageAnimator = imageAnimator;
     }
 
@@ -31,12 +29,11 @@ public class PagerChangeListener implements ViewPager.OnPageChangeListener {
      * 滑动监听
      *
      * @param position             当前位置
-     * @param positionOffset       偏移[当前值+-1]
+     * @param positionOffset       偏移距离[当前值+-1]
      * @param positionOffsetPixels 偏移像素
      */
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
         Log.e("DEBUG-WCL", "position: " + position + ", positionOffset: " + positionOffset);
 
         // 以前滑动, 现在终止
@@ -44,7 +41,7 @@ public class PagerChangeListener implements ViewPager.OnPageChangeListener {
             finishScroll(position);
         }
 
-        // 判断前后滑动
+        // 判断前后滑动是否开始
         if (isStartingScrollToPrevious(position, positionOffset)) {
             startScroll(position);
         } else if (isStartingScrollToNext(position, positionOffset)) {
@@ -59,6 +56,16 @@ public class PagerChangeListener implements ViewPager.OnPageChangeListener {
         }
     }
 
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        //NO-OP
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        //NO-OP
+    }
+
     /**
      * 终止滑动
      * 滑动 && [偏移是0&&滑动终点] || 动画之中
@@ -67,7 +74,7 @@ public class PagerChangeListener implements ViewPager.OnPageChangeListener {
      * @param positionOffset 偏移量
      * @return 终止滑动
      */
-    public boolean isFinishedScrolling(int position, float positionOffset) {
+    private boolean isFinishedScrolling(int position, float positionOffset) {
         return mIsScrolling && (positionOffset == 0f && position == mFinalPosition) || !mImageAnimator.isWithin(position);
     }
 
@@ -84,7 +91,7 @@ public class PagerChangeListener implements ViewPager.OnPageChangeListener {
     }
 
     /**
-     * 从静止到开始滑动, 前一个[position会-1]
+     * 从静止到开始滑动, 前一个[position-1]
      *
      * @param position       位置
      * @param positionOffset 偏移量
@@ -140,20 +147,6 @@ public class PagerChangeListener implements ViewPager.OnPageChangeListener {
             mCurrentPosition = position;
             mIsScrolling = false;
             mImageAnimator.end(position);
-        }
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        //NO-OP
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        if (!mIsScrolling) {
-            mIsScrolling = true;
-            mFinalPosition = position;
-            mImageAnimator.start(mCurrentPosition, position);
         }
     }
 }

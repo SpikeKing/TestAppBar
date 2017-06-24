@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity
 
     @Bind(R.id.main_vp_container) ViewPager mVpContainer;
     @Bind(R.id.toolbar_tl_tab) TabLayout mTlTab;
-    @Bind(R.id.toolbar_iv_outgoing) ImageView mIvOutgoing;
-    @Bind(R.id.toolbar_iv_target) ImageView mIvTarget;
+    @Bind(R.id.appbar_iv_outgoing) ImageView mIvOutgoing;
+    @Bind(R.id.appbar_iv_target) ImageView mIvTarget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
